@@ -7,9 +7,9 @@ public class Employee {
     private String department;
     private int salary;
     private final int id;
-    static int count;
+    private static int count;
 
-    public static void idCount () {
+    private static void idCount () {
         count++;
     }
 

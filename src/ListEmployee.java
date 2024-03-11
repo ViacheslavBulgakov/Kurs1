@@ -1,74 +1,80 @@
 public class ListEmployee {
-    private final Employee[] employees;
-    private int size;
 
-    public ListEmployee() {
-        this.employees = new Employee[10];
-    }
-
-    public void addEmployee(String surname, String name, String patronymic, String department, int salary) {
-        if (size >= employees.length) {
-            System.out.println("Нельзя добавить данные работника. Штат заполнен.");
-        } else {
-            employees[size++] = new Employee(surname, name, patronymic, department, salary);
-        }
-    }
-
-    public void printAllEmployees() {
-        for (int i = 0; i < size; i++) {
+    public static void printAllEmployees(Employee[] employees) {
+        for (int i = 0; i < employees.length; i++) {
             Employee employee = employees[i];
             System.out.println(employee);
         }
     }
 
-    public int sumSalary() {
+    public static int sumSalary(Employee[] employees) {
         int sum = 0;
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < employees.length; i++) {
             Employee employee = employees[i];
-            sum = sum + employee.getSalary();
+            if (employee != null) {
+                sum = sum + employee.getSalary();
+            }
         }
         return sum;
     }
 
-    public void minSalary(int min) {
-        for (int i = 0; i < size; i++) {
+    public static String minSalary(Employee[] employees) {
+        int min = 1000;
+        String employeeSalaryMin = null;
+        for (int i = 0; i < employees.length; i++) {
             Employee employee = employees[i];
-            if (employee.getSalary() < min) {
-                min = employee.getSalary();
+            if (employee != null) {
+                if (employee.getSalary() < min) {
+                    min = employee.getSalary();
+                    employeeSalaryMin = employee.getSurname();
+                }
             }
         }
-        for (int i = 0; i < size; i++) {
-            Employee employee = employees[i];
-            if (employee.getSalary() == min) {
-                System.out.println("Минимальная зарплата - " + ' ' + min + " у сотрудника : " + employee.getSurname() + ' ' + employee.getName()
-                        + ' ' + employee.getPatronymic() + ' ' + " id - " + employee.getId());
-            }
-        }
+        return employeeSalaryMin;
     }
 
-    public void maxSalary(int max) {
-        max = 0;
-        for (int i = 0; i < size; i++) {
+
+    public static String maxSalary(Employee[] employees) {
+        int max = 0;
+        String employeeSalaryMax = null;
+        for (int i = 0; i < employees.length; i++) {
             Employee employee = employees[i];
-            if (employee.getSalary() > max) {
-                max = employee.getSalary();
+            if (employee != null) {
+                if (employee.getSalary() > max) {
+                    max = employee.getSalary();
+                    employeeSalaryMax = employee.getSurname();
+                }
             }
         }
-        for (int i = 0; i < size; i++) {
+        return employeeSalaryMax;
+    }
+
+    public static int midlSalary(Employee[] employees) {
+        int count = 0;
+        int sum = 0;
+        int midl = 0;
+        for (int i = 0; i < employees.length; i++) {
             Employee employee = employees[i];
-            if (employee.getSalary() == max) {
-                System.out.println("Максимальная зарплата - " + ' ' + max + " у сотрудника : " + employee.getSurname() + ' ' + employee.getName()
-                        + ' ' + employee.getPatronymic() + ' ' + " id - " + employee.getId());
+            if (employee != null) {
+                sum = sum + employee.getSalary();
+                count++;
             }
         }
-    }
-    public int midlSalary() {
-        return sumSalary() / size;
-    }
-    public void printAllName() {
-        for (int i = 0; i < size; i++) {
-            Employee employee = employees[i];
-            System.out.println(employee.getName() + ' ' + employee.getSurname() + ' ' + employee.getPatronymic());
+        if (count > 0) {
+             midl =  sum / count;
+        } else {
+            System.out.println("Нет ни одного сотрудника");
         }
+        return midl;
     }
+
+
+       public static void printAllName(Employee[] employees) {
+           for (int i = 0; i < employees.length; i++) {
+               Employee employee = employees[i];
+               if (employee != null) {
+                   System.out.println(employee.getName() + ' ' + employee.getSurname() + ' ' + employee.getPatronymic());
+               }
+           }
+       }
 }
