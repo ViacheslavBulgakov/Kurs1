@@ -9,18 +9,13 @@ public class Employee {
     private final int id;
     private static int count;
 
-    private static void idCount () {
-        count++;
-    }
-
-
     public Employee(String surname, String name, String patronymic, String department, int salary) {
         this.surname = surname;
         this.name = name;
         this.patronymic = patronymic;
         this.department = department;
         this.salary = salary;
-        Employee.idCount();
+        count++;
         this.id = count;
     }
 

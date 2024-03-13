@@ -1,6 +1,6 @@
 public class Main {
 
-    public Employee[] employees;
+    public static Employee[] employees;
     public int size;
 
     public Main() {
@@ -13,8 +13,73 @@ public class Main {
         } else {
             employees[size++] = new Employee(surname, name, patronymic, department, salary);
         }
-
     }
+    public static void printAllEmployees() {
+        for (int i = 0; i < employees.length; i++) {
+            Employee employee = employees[i];
+            System.out.println(employee);
+        }
+    }
+    public static int sumSalary() {
+        int sum = 0;
+        for (int i = 0; i < employees.length; i++) {
+            Employee employee = employees[i];
+            if (employee != null) {
+                sum = sum + employee.getSalary();
+            }
+        }
+        return sum;
+    }
+    public static Employee minSalary() {
+        int min = 1000;
+        Employee employeeSalaryMin = null;
+        for (int i = 0; i < employees.length; i++) {
+            Employee employee = employees[i];
+            if (employee != null && employee.getSalary() < min) {
+                    min = employee.getSalary();
+                    employeeSalaryMin = employee;
+                }
+            }
+        return employeeSalaryMin;
+    }
+    public static Employee maxSalary() {
+        int max = 0;
+        Employee employeeSalaryMax = null;
+        for (int i = 0; i < employees.length; i++) {
+            Employee employee = employees[i];
+            if (employee != null && employee.getSalary() > max) {
+                    max = employee.getSalary();
+                    employeeSalaryMax = employee;
+                }
+            }
+        return employeeSalaryMax;
+    }
+    public static double midlSalary() {
+        int count = 0;
+        double sum = 0;
+        double midl = 0;
+        for (int i = 0; i < employees.length; i++) {
+            Employee employee = employees[i];
+            if (employee != null) {
+                sum = sum + employee.getSalary();
+                count++;
+            }
+        }
+        if (count > 0) {
+            midl =  sum / count;
+        }
+        return midl;
+    }
+    public static void printAllName() {
+        for (int i = 0; i < employees.length; i++) {
+            Employee employee = employees[i];
+            if (employee != null) {
+                System.out.println(employee.getName() + ' ' + employee.getSurname() + ' ' + employee.getPatronymic());
+            }
+        }
+    }
+
+
 
     public static void main(String[] args) {
 
@@ -33,13 +98,14 @@ public class Main {
         main.addEmployee("Иванов", "Иван", "Иванович", "00", 100);
 
 
-        ListEmployee.printAllEmployees(main.employees);
-        System.out.println("Ежемесячные затраты на зарплату равны - " + ' ' + ListEmployee.sumSalary(main.employees));
-        System.out.println("Минимальная зарплата у сотрудника - " + ListEmployee.minSalary(main.employees));
-        System.out.println("Максимальная зарплата у сотрудника - " + ListEmployee.maxSalary(main.employees));
-        System.out.println("Средняя заработная плата составляет - " + ' ' + ListEmployee.midlSalary(main.employees));
+        printAllEmployees();
+        System.out.println("Ежемесячные затраты на зарплату равны - " + ' ' + sumSalary());
+        System.out.println("Минимальная зарплата у сотрудника - " + minSalary());
+        System.out.println("Максимальная зарплата у сотрудника - " + maxSalary());
+        System.out.println("Средняя заработная плата составляет - " + ' ' + midlSalary());
         System.out.println("Фамилия Имя Отчество всех сотрудников : ");
-        ListEmployee.printAllName(main.employees);
+        printAllName();
 
     }
 }
+//https://github.com/ViacheslavBulgakov/Kurs1/compare/hwKurs1
